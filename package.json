@@ -1,27 +1,28 @@
 {
-  "name": "clean-arch-typescript",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest --no-cache --watchAll"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pedrosantana-dev/clean-arch-typescript.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pedrosantana-dev/clean-arch-typescript/issues"
-  },
-  "homepage": "https://github.com/pedrosantana-dev/clean-arch-typescript#readme",
-  "devDependencies": {
-    "@types/jest": "^29.5.7",
-    "@types/node": "^20.8.10",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
-  }
+	"name": "clean-arch-typescript",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest --no-cache --watchAll"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pedrosantana-dev/clean-arch-typescript.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/pedrosantana-dev/clean-arch-typescript/issues"
+	},
+	"homepage": "https://github.com/pedrosantana-dev/clean-arch-typescript#readme",
+	"devDependencies": {
+		"@faker-js/faker": "^8.2.0",
+		"@types/jest": "^29.5.7",
+		"@types/node": "^20.8.10",
+		"jest": "^29.7.0",
+		"ts-jest": "^29.1.1",
+		"typescript": "^5.2.2"
+	}
 }
