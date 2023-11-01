@@ -1,22 +1,38 @@
 import { CacheStore } from "@/data/contracts/cache";
 import { LocalSavePurchases } from "@/data/usecases";
+import { SavePurchases } from "@/domain";
 
 class CacheStoreSpy implements CacheStore {
 	deleteCallsCount = 0;
 	insertCallsCount = 0;
 	deleteKey: string;
 	insertKey: string;
+	insertValues: Array<SavePurchases.Params> = [];
 
 	delete(key: string): void {
 		this.deleteCallsCount++;
 		this.deleteKey = key;
 	}
 
-	insert(key: string): void {
+	insert(key: string, value: any): void {
 		this.insertCallsCount++;
 		this.insertKey = key;
+		this.insertValues = value;
 	}
 }
+
+const mockPurchases = (): Array<SavePurchases.Params> => [
+	{
+		id: "1",
+		date: new Date(),
+		value: 50,
+	},
+	{
+		id: "2",
+		date: new Date(),
+		value: 70,
+	},
+];
 
 type SutTypes = {
 	sut: LocalSavePurchases;
@@ -40,7 +56,8 @@ describe("LocalSavePurchases", () => {
 
 	test("Should call delete with correct key", async () => {
 		const { cacheStore, sut } = makeSut();
-		await sut.save();
+		const purchases = mockPurchases();
+		await sut.save(purchases);
 		expect(cacheStore.deleteKey).toBe("purchases");
 		expect(cacheStore.deleteCallsCount).toBe(1);
 	});
@@ -55,15 +72,18 @@ describe("LocalSavePurchases", () => {
 		// } catch (error) {
 		// 	expect(error.message).toBe("Delete failed");
 		// }
-		await expect(sut.save()).rejects.toThrow();
+		const purchases = mockPurchases();
+		await expect(sut.save(purchases)).rejects.toThrow();
 		expect(cacheStore.insertCallsCount).toBe(0);
 	});
 
 	test("Should insert new Cache if delete succeeds", async () => {
 		const { cacheStore, sut } = makeSut();
-		await sut.save();
+		const purchases = mockPurchases();
+		await sut.save(purchases);
 		expect(cacheStore.insertCallsCount).toBe(1);
 		expect(cacheStore.deleteCallsCount).toBe(1);
 		expect(cacheStore.insertKey).toBe("purchases");
+		expect(cacheStore.insertValues).toEqual(purchases);
 	});
 });
