@@ -18,10 +18,10 @@ export class LocalLoadPurchases implements SavePurchases, LoadPurchases {
 			if (CachePolicy.validate(cache.timestamp, this.currentDate)) {
 				return cache.value;
 			} else {
-				throw new Error();
+				this.chacheStore.delete(this.key);
+				return [];
 			}
 		} catch (error) {
-			this.chacheStore.delete(this.key);
 			return [];
 		}
 	}

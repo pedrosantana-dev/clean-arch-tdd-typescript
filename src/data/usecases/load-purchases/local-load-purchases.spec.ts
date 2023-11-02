@@ -25,8 +25,7 @@ describe('LocalSavePurchases', () => {
 		const { cacheStore, sut } = makeSut();
 		cacheStore.simulateFetchError();
 		await expect(sut.loadAll()).resolves.toEqual([]);
-		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch, CacheStoreSpy.Action.delete]);
-		expect(cacheStore.deleteKey).toBe('purchases');
+		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch]);
 	});
 
 	test('Should return a list of purchases if cache is valid', async () => {
