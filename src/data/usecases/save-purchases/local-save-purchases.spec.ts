@@ -38,7 +38,7 @@ describe('LocalSavePurchases', () => {
 		const timestamp = new Date();
 		const { cacheStore, sut } = makeSut(timestamp);
 		const purchases = mockPurchases();
-		await sut.save(purchases);
+		await expect(sut.save(purchases)).resolves.toBeFalsy();
 		expect(cacheStore.messages).toEqual([CacheStoreSpy.Message.delete, CacheStoreSpy.Message.insert]);
 		expect(cacheStore.deleteKey).toBe('purchases');
 		expect(cacheStore.insertKey).toBe('purchases');
