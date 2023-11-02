@@ -1,4 +1,4 @@
-import { SavePurchases } from '@/domain/usecases';
+import { SavePurchases, LoadPurchases } from '@/domain/usecases';
 import { CacheStore } from '@/data/contracts/cache';
 
 export class CacheStoreSpy implements CacheStore {
@@ -7,10 +7,12 @@ export class CacheStoreSpy implements CacheStore {
 	insertKey: string;
 	fetchKey: string;
 	insertValues: Array<SavePurchases.Params> = [];
+	fectchResult: any;
 
-	fetch(key: string): void {
+	fetch(key: string): any {
 		this.actions.push(CacheStoreSpy.Action.fetch);
 		this.fetchKey = key;
+		return this.fectchResult;
 	}
 
 	delete(key: string): void {
