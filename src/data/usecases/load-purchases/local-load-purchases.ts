@@ -27,7 +27,10 @@ export class LocalLoadPurchases implements SavePurchases, LoadPurchases {
 
 	validate(): void {
 		try {
-			this.chacheStore.fetch(this.key);
+			const cache = this.chacheStore.fetch(this.key);
+			if (!CachePolicy.validate(cache.timestamp, this.currentDate)) {
+				throw new Error();
+			}
 		} catch (error) {
 			this.chacheStore.delete(this.key);
 		}
