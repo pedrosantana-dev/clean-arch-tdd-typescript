@@ -74,4 +74,19 @@ describe('LocalSavePurchases', () => {
 		expect(cacheStore.fetchKey).toBe('purchases');
 		expect(cacheStore.deleteKey).toBe('purchases');
 	});
+
+	test('Should return an empty list if cache is lempty', async () => {
+		const currentDate = new Date();
+		const timestamp = new Date(currentDate);
+		timestamp.setDate(timestamp.getDate() - 3);
+		timestamp.setSeconds(timestamp.getSeconds() + 1);
+		const { cacheStore, sut } = makeSut(currentDate);
+		cacheStore.fectchResult = {
+			timestamp,
+			value: [],
+		};
+		await expect(sut.loadAll()).resolves.toEqual([]);
+		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch]);
+		expect(cacheStore.fetchKey).toBe('purchases');
+	});
 });
