@@ -25,4 +25,12 @@ export class LocalLoadPurchases implements SavePurchases, LoadPurchases {
 			return [];
 		}
 	}
+
+	validate(): void {
+		try {
+			this.chacheStore.fetch(this.key);
+		} catch (error) {
+			this.chacheStore.delete(this.key);
+		}
+	}
 }
