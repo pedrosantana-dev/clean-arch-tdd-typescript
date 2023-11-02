@@ -52,9 +52,8 @@ describe('LocalSavePurchases', () => {
 			value: mockPurchases(),
 		};
 		await expect(sut.loadAll()).resolves.toEqual([]);
-		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch, CacheStoreSpy.Action.delete]);
+		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch]);
 		expect(cacheStore.fetchKey).toBe('purchases');
-		expect(cacheStore.deleteKey).toBe('purchases');
 	});
 
 	test('Should return an empty list if cache is on expiration date', async () => {
@@ -66,9 +65,8 @@ describe('LocalSavePurchases', () => {
 			value: mockPurchases(),
 		};
 		await expect(sut.loadAll()).resolves.toEqual([]);
-		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch, CacheStoreSpy.Action.delete]);
+		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch]);
 		expect(cacheStore.fetchKey).toBe('purchases');
-		expect(cacheStore.deleteKey).toBe('purchases');
 	});
 
 	test('Should return an empty list if cache is lempty', async () => {
